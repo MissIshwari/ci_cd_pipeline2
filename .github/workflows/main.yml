@@ -18,6 +18,6 @@ jobs:
 
       - name:  Current folder
         run:  |
-            echo pwd
+            pwd
             
     
