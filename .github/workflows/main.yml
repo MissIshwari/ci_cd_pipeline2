@@ -1,1 +1,23 @@
 
+name:  CICD Deployment
+on:
+  push:
+    branches:
+      -  main
+jobs:
+  deploy:
+    runs-on:  ubuntu-latest
+    steps:
+      - name:  Update EC2
+        run:  |
+            sudo apt update
+
+      - name:  Print names
+        run:  |
+            echo "Ishwari"
+
+      - name:  Current folder
+        run:  |
+            echo pwd
+            
+    
