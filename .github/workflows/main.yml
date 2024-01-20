@@ -4,6 +4,19 @@ on:
   push:
     branches:
       -  main
+
+  pull_request:
+    branches:
+      -  main
+
+  schedule:
+    -  cron:  '0 0 * * *'
+
+  release:
+    types:
+      -  published
+      -  created
+      -  prereleased
 jobs:
   deploy:
     runs-on:  ubuntu-latest
