@@ -9,9 +9,6 @@ on:
     branches:
       -  main
 
-  schedule:
-    -  cron:  '0 0 * * *'
-
   release:
     types:
       -  published
@@ -21,16 +18,50 @@ jobs:
   deploy:
     runs-on:  ubuntu-latest
     steps:
-      - name:  Update EC2
-        run:  |
-            sudo apt update
+      -  name:  Checkout code
+         uses:  actions/checkout@v4
 
-      - name:  Print names
-        run:  |
-            echo "Ishwari"
+      -  name:  Login and Update EC2
+         uses:  appleboy/ssh-action@v1.1.0
+         with:
+           host:  52.54.64.249
+           username:  ${{secrets.EC2_USERNAME}}
+           key:  ${{secrets.EC2_KEY}}
+           port:  22
+           script:  |
+             pwd
+             whoami
+             sudo apt-get update -y
+             sudo apt-get install nginx -y
+             sudo mkdir -p /var/www/html
+             sudo chown -R ${{secrets.EC2_USERNAME}} /var/www/html
+             sudo chmod -R 755 /var/www/html
 
-      - name:  Current folder
-        run:  |
-            pwd
+      
+             
+      -  name:  Copy file with ssh
+         uses:  appleboy/scp-action@v0.1.7
+         with:
+            host:  ${{secrets.EC2_HOST}}
+            username:  ${{secrets.EC2_USERNAME}}
+            key:  ${{secrets.EC2_KEY}}
+            port:  22
+            source:  ./
+            target:  /var/www/html
+
+      -  name:  Restart Nginx
+         uses:  appleboy/ssh-action@v1.0.3
+         with:
+            host:  ${{secrets.EC2_HOST}}
+            username:  ${{secrets.EC2_USERNAME}}
+            key:  ${{secrets.EC2_KEY}}
+            port:  22
+            script:  |
+                sudo systemctl restart nginx
+            
+            
+             
+             
+                       
             
     
