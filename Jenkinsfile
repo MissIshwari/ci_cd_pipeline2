@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        SSH_USER = 'ubuntu'
-        SERVER_IP = '3.236.180.114'
-    }
-
     stages {
         stage('Update EC2'){
             steps{
@@ -26,7 +21,7 @@ pipeline {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SERVER_IP} '
                             
-                            sudo index.html /var/www/html
+                            sudo cp index.html /var/www/html
                         '
                     '''
                 }
