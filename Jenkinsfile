@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        SSH_USER = 'ubuntu'
+        SERVER_IP = '44.204.182.132'
+    }
+
     stages {
         stage('Update EC2'){
             steps{
@@ -20,7 +25,7 @@ pipeline {
                 sshagent(credentials : ['hero-vired-credentials']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SERVER_IP} '
-                            
+                            sudo ls
                             sudo cp index.html /var/www/html
                         '
                     '''
