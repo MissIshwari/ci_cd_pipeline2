@@ -26,7 +26,7 @@ pipeline {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SERVER_IP} '
                             sudo ls
-                            sudo cp index.html /var/www/html
+                            sudo cp /home/ubuntu/index.html /var/www/html
                         '
                     '''
                 }
