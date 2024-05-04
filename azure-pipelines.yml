@@ -14,4 +14,10 @@ steps:
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/XYZ.zip'
+  - task: SSH@0
+    inputs:
+      sshEndpoint:  'VM-connection'
+      runOptions: 'commands'
+      commands: |
+        scp $(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@20.51.192.206:/ubuntu/home
       
