@@ -11,18 +11,20 @@ steps:
   - task: Bash@3
     inputs:
       script: |
+        cd $(Build.SourcesDirectory)
+        ls
         pwd
-  - task: ArchiveFiles@2
-    inputs: 
-      rootFolderOrFile: '/myagent/_work/$(Build.SourcesDirectory)'
-      includeRootFolder: false
-      archiveType: 'zip'
-      archiveFile: '/myagent/_work/$(Build.ArtifactStagingDirectory)/XYZ.zip'
+  # - task: ArchiveFiles@2
+  #   inputs: 
+  #     rootFolderOrFile: '/myagent/_work/$(Build.SourcesDirectory)'
+  #     includeRootFolder: false
+  #     archiveType: 'zip'
+  #     archiveFile: '/myagent/_work/$(Build.ArtifactStagingDirectory)/XYZ.zip'
   
-  - task: SSH@0
-    inputs:
-      sshEndpoint:  'VM-connection'
-      runOptions: 'commands'
-      commands: |
-        scp $/myagent/_work/(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@20.51.192.206:/home/azureuser
+  # - task: SSH@0
+  #   inputs:
+  #     sshEndpoint:  'VM-connection'
+  #     runOptions: 'commands'
+  #     commands: |
+  #       scp $/myagent/_work/(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@20.51.192.206:/home/azureuser
       
