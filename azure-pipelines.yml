@@ -9,14 +9,14 @@ steps:
   - checkout: self
   - task: ArchiveFiles@2
     inputs: 
-      rootFolderOrFile: '$(Build.SourcesDirectory)'
+      rootFolderOrFile: '/myagent/$(Build.SourcesDirectory)'
       includeRootFolder: false
       archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/XYZ.zip'
+      archiveFile: '/myagent/$(Build.ArtifactStagingDirectory)/XYZ.zip'
   - task: SSH@0
     inputs:
       sshEndpoint:  'VM-connection'
       runOptions: 'commands'
       commands: |
-        scp $(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@20.51.192.206:/ubuntu/home
+        scp $/myagent/(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@20.51.192.206:/home/azureuser
       
