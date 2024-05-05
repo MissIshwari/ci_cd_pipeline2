@@ -30,12 +30,14 @@ steps:
       targetFolder: '/home/azureuser'
       
   
-  # - task: SSH@0
-  #   inputs:
-  #     sshEndpoint:  'VM-connection'
-  #     runOptions: 'commands'
-  #     commands: |
-  #       ssh-keyscan -H 20.51.192.206 >> ~/.ssh/known_hosts
-  #       scp $(Build.ArtifactStagingDirectory)/XYZ.tar.gz azureuser@20.51.192.206:/home/azureuser
-  
+  - task: SSH@0
+    inputs:
+      sshEndpoint:  'VM-connection'
+      runOptions: 'commands'
+      commands: |
+        ssh -o StrictHostKeyChecking=no azureuser@20.51.192.206 << 'ENDSSH'
+          tar -xvf /home/azureuser/XYZ.tar.gz -C /home/azureuser
+          sudo cp -r /home/azureuser/XYZ/* /var/www/html/
+          sudo systemctl restart nginx
+        ENDSSH
     
