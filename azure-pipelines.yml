@@ -22,10 +22,10 @@ steps:
       archiveType: 'tar'
       archiveFile: '$(Build.ArtifactStagingDirectory)/XYZ.tar.gz'
   
-  # - task: SSH@0
-  #   inputs:
-  #     sshEndpoint:  'VM-connection'
-  #     runOptions: 'commands'
-  #     commands: |
-  #       scp $/myagent/_work/(Build.ArtifactStagingDirectory)/XYZ.zip azureuser@20.51.192.206:/home/azureuser
+  - task: SSH@0
+    inputs:
+      sshEndpoint:  'VM-connection'
+      runOptions: 'commands'
+      commands: |
+        scp $(Build.ArtifactStagingDirectory)/XYZ.tar.gz azureuser@20.51.192.206:/home/azureuser
       
