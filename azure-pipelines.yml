@@ -36,6 +36,7 @@ steps:
       runOptions: 'commands'
       commands: |
         tar -xvf /home/azureuser/XYZ.tar.gz -C /home/azureuser
-        sudo cp -r /home/azureuser/XYZ/* /var/www/html/
+        sudo rm /home/azureuser/XYZ.tar.gz 
+        sudo cp -r /home/azureuser/* /var/www/html/
         sudo systemctl restart nginx
     
