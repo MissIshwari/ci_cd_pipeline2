@@ -19,8 +19,8 @@ steps:
     inputs: 
       rootFolderOrFile: '$(Build.SourcesDirectory)'
       includeRootFolder: false
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/XYZ.zip'
+      archiveType: 'tar'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/XYZ.tar.gz'
   
   # - task: SSH@0
   #   inputs:
