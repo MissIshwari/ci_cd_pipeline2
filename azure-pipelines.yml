@@ -27,5 +27,6 @@ steps:
       sshEndpoint:  'VM-connection'
       runOptions: 'commands'
       commands: |
+        ssh-keyscan -H 20.51.192.206 >> ~/.ssh/known_hosts
         scp $(Build.ArtifactStagingDirectory)/XYZ.tar.gz azureuser@20.51.192.206:/home/azureuser
       
